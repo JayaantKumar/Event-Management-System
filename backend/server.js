@@ -9,7 +9,11 @@ connectDB();
 const app = express();
 
 app.use(cors({
-  origin: '*', // Allow all origins for development; restrict in production
+  origin: [
+    'http://localhost:5174', 
+    'https://event-management-system-93h3.vercel.app'
+  ],
+   // Allow all origins for development; restrict in production
   credentials: true
 }));
 app.use(express.json());
