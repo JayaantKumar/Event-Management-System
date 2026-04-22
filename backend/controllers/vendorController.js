@@ -1,7 +1,6 @@
 const Product = require('../models/Product');
 
-// @desc    Add a new item
-// @route   POST /api/vendor/items
+
 exports.addItem = async (req, res) => {
   try {
     const { name, price } = req.body;
@@ -16,8 +15,7 @@ exports.addItem = async (req, res) => {
   }
 };
 
-// @desc    Get vendor's items
-// @route   GET /api/vendor/items
+
 exports.getItems = async (req, res) => {
   try {
     // Only fetch products that belong to the logged-in vendor
@@ -28,8 +26,7 @@ exports.getItems = async (req, res) => {
   }
 };
 
-// @desc    Update product status
-// @route   PUT /api/vendor/items/:id/status
+
 exports.updateItemStatus = async (req, res) => {
   try {
     const { status } = req.body;
@@ -45,8 +42,7 @@ exports.updateItemStatus = async (req, res) => {
   }
 };
 
-// @desc    Delete an item
-// @route   DELETE /api/vendor/items/:id
+
 exports.deleteItem = async (req, res) => {
   try {
     const product = await Product.findOneAndDelete({ _id: req.params.id, vendorId: req.user.id });

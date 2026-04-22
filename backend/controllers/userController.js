@@ -2,10 +2,7 @@ const Product = require('../models/Product');
 const Order = require('../models/Order');
 const Guest = require('../models/Guest');
 
-// --- SHOPPING & ORDERS ---
 
-// @desc    Get all available items from all vendors
-// @route   GET /api/user/items
 exports.getAvailableItems = async (req, res) => {
   try {
     const items = await Product.find({ status: 'Available' });
@@ -15,8 +12,7 @@ exports.getAvailableItems = async (req, res) => {
   }
 };
 
-// @desc    Place a new order (Checkout)
-// @route   POST /api/user/orders
+
 exports.placeOrder = async (req, res) => {
   try {
     const { items, totalAmount } = req.body;
@@ -31,8 +27,7 @@ exports.placeOrder = async (req, res) => {
   }
 };
 
-// @desc    Get user's order history
-// @route   GET /api/user/orders
+
 exports.getMyOrders = async (req, res) => {
   try {
     const orders = await Order.find({ userId: req.user.id }).sort({ createdAt: -1 });
@@ -42,7 +37,7 @@ exports.getMyOrders = async (req, res) => {
   }
 };
 
-// --- GUEST LIST ---
+
 
 exports.getGuests = async (req, res) => {
   try {

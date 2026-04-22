@@ -1,6 +1,8 @@
 const Membership = require('../models/Membership');
+const User = require('../models/User');
+const Order = require('../models/Order');
 
-// Generate a random membership number (e.g., MEM-8374)
+
 const generateMemNo = () => 'MEM-' + Math.floor(1000 + Math.random() * 9000);
 
 // Helper to calculate end date
@@ -12,8 +14,7 @@ const calculateEndDate = (duration, startDate = new Date()) => {
   return date;
 };
 
-// @desc    Add a new membership
-// @route   POST /api/admin/membership
+
 exports.addMembership = async (req, res) => {
   try {
     const { userId, duration } = req.body;
@@ -34,8 +35,7 @@ exports.addMembership = async (req, res) => {
   }
 };
 
-// @desc    Update a membership (Extend or Cancel)
-// @route   PUT /api/admin/membership/:memNo
+
 exports.updateMembership = async (req, res) => {
   try {
     const { action } = req.body; // 'extend' or 'cancel'
@@ -55,5 +55,36 @@ exports.updateMembership = async (req, res) => {
     res.json({ message: `Membership ${action}ed successfully!`, membership });
   } catch (error) {
     res.status(400).json({ message: error.message });
+  }
+};
+
+
+
+exports.getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find({ role: 'user' }).select('-password');
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+exports.getAllVendors = async (req, res) => {
+  try {
+    const vendors = await User.find({ role: 'vendor' }).select('-password');
+    res.json(vendors);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+exports.getReports = async (req, res) => {
+  try {
+    const orders = await Order.find().sort({ createdAt: -1 });
+    res.json(orders);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };

@@ -8,9 +8,8 @@ connectDB();
 
 const app = express();
 
-// 🚨 CRITICAL: CORS and JSON middleware MUST come BEFORE your routes!
 app.use(cors({
-  origin: 'http://localhost:5174', // Your Vite frontend port
+  origin: '*', // Allow all origins for development; restrict in production
   credentials: true
 }));
 app.use(express.json());

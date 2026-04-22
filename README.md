@@ -32,6 +32,7 @@ event-management-system/
     │   ├── components/    # Reusable components & ProtectedRoutes
     │   ├── context/       # AuthContext (State management)
     │   ├── pages/         # Login, Admin, Vendor, and User Dashboards
+ HEAD
     │   └── utils/         # Axios interceptors (api.js)
 
 💻 Local Setup Instructions
@@ -58,4 +59,4 @@ cd frontend
 
 npm install
 
-Start the client: npm run dev
+
